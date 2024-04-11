@@ -1,6 +1,5 @@
 #include <raylib.h>
-#include "grid.h"
-#include "blocks.cpp"
+#include "game.h"
 #define FPS 60
 
 int main()
@@ -9,17 +8,13 @@ int main()
     InitWindow(300, 600, "raylib Tetris");
     SetTargetFPS(FPS);
 
-    Grid grid = Grid();
-    grid.Print();
-
-    TBlock block = TBlock();
-
+    Game game = Game();
     while (WindowShouldClose() == false)
     {
+        game.KeyboardInput();
         BeginDrawing();
         ClearBackground(darkGrey);
-        grid.Draw();
-        block.Draw();
+        game.Draw();
         EndDrawing();
     }
     CloseWindow();
