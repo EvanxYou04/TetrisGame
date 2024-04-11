@@ -14,10 +14,10 @@ Block Game::GetRandomBlock()
     if (blocks.empty())
     {
     }
-    int idx = rand() % blocks.sizer();
+    int idx = rand() % blocks.size();
     Block block = blocks[idx];
-    blocks.erase(blocks.begin + idx);
-    return block
+    blocks.erase(blocks.begin() + idx);
+    return block;
 }
 
 std::vector<Block> Game::GetAllBlocks()
