@@ -25,6 +25,23 @@ std::vector<Block> Game::GetAllBlocks()
     return {IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()};
 }
 
+bool Game::IsBlockOutside()
+{
+    std::vector<Position> tiles = currBlock.GetCellPos();
+    for (Position tile: tiles) 
+    {
+        if (grid.isCellOutside(tile.row, tile.col))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Game::RotateBlock()
+{
+}
+
 void Game::Draw()
 {
     grid.Draw();
@@ -45,6 +62,9 @@ void Game::KeyboardInput()
     case KEY_DOWN:
         MoveBlockDown();
         break;
+    case KEY_UP:
+        RotateBlock();
+        break;
     default:
         break;
     }
@@ -53,12 +73,24 @@ void Game::KeyboardInput()
 void Game::MoveBlockLeft()
 {
     currBlock.Move(0, -1);
+    if (IsBlockOutside())
+    {
+        currBlock.Move(0,1);
+    }
 }
 void Game::MoveBlockRight()
 {
     currBlock.Move(0, 1);
+    if (IsBlockOutside())
+    {
+        currBlock.Move(0,-1);
+    }
 }
 void Game::MoveBlockDown()
 {
     currBlock.Move(1, 0);
+    if (IsBlockOutside())
+    {
+        currBlock.Move(-1,0);
+    }
 }
