@@ -40,6 +40,7 @@ bool Game::IsBlockOutside()
 
 void Game::RotateBlock()
 {
+    currBlock.Rotate();
 }
 
 void Game::Draw()
